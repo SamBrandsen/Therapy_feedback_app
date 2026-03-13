@@ -352,9 +352,17 @@ st.title("Therapy Reflection Template Generator")
 
 st.markdown(
 """
-This tool generates a **blank therapy reflection template** based on your preferences.
+This tool aims to help you reflect on your experience in therapy — what feels helpful, what feels difficult, and what you might want your therapist to understand.
 
-No responses are entered or stored in this website.
+The tool generates a blank reflection template based on the preferences you select. After downloading the document, you may answer as many or as few questions as you like.
+
+People use reflection tools like this in different ways. Some use them to organize their own thoughts. Others choose to share some or all of their reflections with a therapist or another trusted person.
+
+Conversations about feedback can sometimes strengthen a therapy relationship. At the same time, you are never required to share feedback if doing so feels uncomfortable or unsafe.
+
+Please also note that materials shared with a therapist may become part of the clinical record depending on their documentation practices.
+
+This website does not collect or store responses. It only generates a downloadable template for your own use.
 """
 )
 
