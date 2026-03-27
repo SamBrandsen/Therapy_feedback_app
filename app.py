@@ -387,7 +387,7 @@ Please also be aware that in circumstances of therapy harm or abuse, it is not a
 
 This tool was created by **Sam Brandsen** in collaboration with the **Therapy Harm Response & Prevention initiative**.
 
-If you have any feedback about the app, please feel welcome to contact us at **sambrandsen7@gmail.com**.
+If you have any feedback about the app, please feel welcome to contact us via the following form **https://forms.gle/pdj6dsNrtw9Ep13P9**.
 """)
 
 focus = st.radio(
