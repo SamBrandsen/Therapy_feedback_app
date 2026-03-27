@@ -256,7 +256,7 @@ FINAL_QUESTION = {
 # ------------------------------------------------
 
 def filter_questions(style, focus):
-
+    style = style.lower()  # normalize
     selected = []
 
     for q in QUESTION_BANK:
@@ -264,18 +264,16 @@ def filter_questions(style, focus):
         if q["style"] not in [style, "both"]:
             continue
 
-        if focus == "General Feedback":
-            if q["focus"] != "general":
-                continue
-
-        elif focus == "Concerns / Harm":
-            if q["focus"] != "harm":
-                continue
+        if focus == "General Feedback" and q["focus"] != "general":
+            continue
+        elif focus == "Concerns / Harm" and q["focus"] != "harm":
+            continue
+        elif focus == "Both":
+            pass  # include all
 
         selected.append(q)
 
     return selected
-
 
 # ------------------------------------------------
 # GROUPING
@@ -304,7 +302,6 @@ def group_by_section(questions):
 
     return ordered_sections
 
-
 # ------------------------------------------------
 # DOCUMENT GENERATION
 # ------------------------------------------------
@@ -318,11 +315,12 @@ def make_docx(sections):
     doc.add_paragraph(
         f"Generated: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}"
     )
+
     doc.add_paragraph(
-        "This document is generated through a tool that aims to help clients share their experiences in therapy with their therapist. The app includes a broad range of question prompts and we hope that this tool may provide a helpful starting point for clinicians and clients in checking in about the therapeutic process."
+        "This document is generated through a tool that aims to help clients share their experiences in therapy with their therapist. "
+        "The app includes a broad range of question prompts and we hope that this tool may provide a helpful starting point for clinicians and clients "
+        "in checking in about the therapeutic process."
     )
-
-
 
     for section, questions in sections.items():
 
@@ -349,7 +347,6 @@ def make_docx(sections):
     f.seek(0)
 
     return f.read()
-
 
 # ------------------------------------------------
 # UI
