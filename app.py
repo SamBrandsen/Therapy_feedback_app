@@ -379,7 +379,7 @@ Conversations about feedback can sometimes strengthen a therapy relationship. At
 
 Please also note that materials shared with a therapist may become part of the clinical record depending on their documentation practices.
 
-Please also be aware that in circumstances of therapy harm or abuse, it is not always safe for a client to give feedback to a therapist. If you are experiencing therapy harm or abuse, or wonder if you may be, **click here for more information and resources**.
+Please also be aware that in circumstances of therapy harm or abuse, it is not always safe for a client to give feedback to a therapist. If you are experiencing therapy harm or abuse, or wonder if you may be, here is a starting document: **https://docs.google.com/document/d/1puwUQ5SjOyxyxcSdw-2q3YoPVOhOAsxM274qaEeoaCw/edit?usp=sharing**.
 
 ---
 
