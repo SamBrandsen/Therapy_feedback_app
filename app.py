@@ -3,7 +3,6 @@ from io import BytesIO
 from docx import Document
 from datetime import datetime, timezone
 from collections import defaultdict
-import random
 
 st.set_page_config(page_title="Therapy Reflection Template Generator", layout="centered")
 
@@ -245,7 +244,7 @@ QUESTION_BANK = [
 ]
 
 # ------------------------------------------------
-# UNIVERSAL FINAL QUESTION
+# FINAL QUESTION
 # ------------------------------------------------
 
 FINAL_QUESTION = {
@@ -265,18 +264,30 @@ def filter_questions(style, focus):
         if q["style"] not in [style, "both"]:
             continue
 
-        if focus == "General Feedback" and q["focus"] != "general":
-            continue
+        if focus == "General Feedback":
+            if q["focus"] != "general":
+                continue
 
-        if focus == "Concerns / Harm" and q["focus"] != "harm":
-            continue
+        elif focus == "Concerns / Harm":
+            if q["focus"] != "harm":
+                continue
 
         selected.append(q)
 
-    random.shuffle(selected)
-
     return selected
 
+
+# ------------------------------------------------
+# GROUPING
+# ------------------------------------------------
+
+SECTION_ORDER = [
+    "Overall Experience",
+    "Topics & Comfort",
+    "Structure & Style",
+    "Relational Climate",
+    "Therapy Harm & Boundaries"
+]
 
 def group_by_section(questions):
 
@@ -285,7 +296,13 @@ def group_by_section(questions):
     for q in questions:
         sections[q["section"]].append(q["text"])
 
-    return sections
+    ordered_sections = {}
+
+    for section in SECTION_ORDER:
+        if section in sections:
+            ordered_sections[section] = sections[section]
+
+    return ordered_sections
 
 
 # ------------------------------------------------
@@ -301,21 +318,11 @@ def make_docx(sections):
     doc.add_paragraph(
         f"Generated: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}"
     )
-
     doc.add_paragraph(
-        """This tool aims to help you reflect on your experience in therapy — what feels helpful, what feels difficult, and what you might want your therapist to understand.
-
-The tool generates a blank reflection template based on the preferences you select. After downloading the document, you may answer as many or as few questions as you like.
-
-People use reflection tools like this in different ways. Some use them to organize their own thoughts. Others choose to share some or all of their reflections with a therapist or another trusted person.
-
-Conversations about feedback can sometimes strengthen a therapy relationship. At the same time, you are never required to share feedback if doing so feels uncomfortable or unsafe.
-
-Please also note that materials shared with a therapist may become part of the clinical record depending on their documentation practices.
-
-This website does not collect or store responses. It only generates a downloadable template for your own use.
-"""
+        "This document is generated through a tool that aims to help clients share their experiences in therapy with their therapist. The app includes a broad range of question prompts and we hope that this tool may provide a helpful starting point for clinicians and clients in checking in about the therapeutic process."
     )
+
+
 
     for section, questions in sections.items():
 
@@ -350,21 +357,41 @@ This website does not collect or store responses. It only generates a downloadab
 
 st.title("Therapy Reflection Template Generator")
 
-st.markdown(
-"""
+st.markdown("""
+### About the Therapy Reflection Template Generator
+
 This tool aims to help you reflect on your experience in therapy — what feels helpful, what feels difficult, and what you might want your therapist to understand.
 
 The tool generates a blank reflection template based on the preferences you select. After downloading the document, you may answer as many or as few questions as you like.
 
+This website does not collect or store responses. It only generates a downloadable template for your own use.
+
+---
+
+### How You Might Use this Tool
+
 People use reflection tools like this in different ways. Some use them to organize their own thoughts. Others choose to share some or all of their reflections with a therapist or another trusted person.
+
+Our hope is that this tool can assist any client who feels like they may benefit from sharing feedback with their therapist, but who may need some support in order to do so.
 
 Conversations about feedback can sometimes strengthen a therapy relationship. At the same time, you are never required to share feedback if doing so feels uncomfortable or unsafe.
 
+---
+
+### Disclaimer
+
 Please also note that materials shared with a therapist may become part of the clinical record depending on their documentation practices.
 
-This website does not collect or store responses. It only generates a downloadable template for your own use.
-"""
-)
+Please also be aware that in circumstances of therapy harm or abuse, it is not always safe for a client to give feedback to a therapist. If you are experiencing therapy harm or abuse, or wonder if you may be, **click here for more information and resources**.
+
+---
+
+### About Us
+
+This tool was created by **Sam Brandsen** in collaboration with the **Therapy Harm Response & Prevention initiative**.
+
+If you have any feedback about the app, please feel welcome to contact us at **sambrandsen7@gmail.com**.
+""")
 
 focus = st.radio(
     "Focus of reflection",
@@ -373,7 +400,7 @@ focus = st.radio(
 
 style = st.radio(
     "Question style",
-    ["structured", "unstructured"]
+    ["Structured", "Unstructured"]
 )
 
 with st.expander("What is the difference between structured and unstructured questions?"):
