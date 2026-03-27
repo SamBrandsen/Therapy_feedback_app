@@ -330,24 +330,23 @@ def make_docx(sections):
 
             doc.add_paragraph(q)
 
-            for _ in range(3):
-                doc.add_paragraph("________________________________________________________")
-
+            # Clean spacing instead of underscore lines
+            doc.add_paragraph()
             doc.add_paragraph()
 
     doc.add_heading("Sharing Feedback", level=2)
 
     doc.add_paragraph(FINAL_QUESTION["text"])
 
-    for _ in range(4):
-        doc.add_paragraph("________________________________________________________")
+    # Clean spacing for final response
+    doc.add_paragraph()
+    doc.add_paragraph()
 
     f = BytesIO()
     doc.save(f)
     f.seek(0)
 
     return f.read()
-
 # ------------------------------------------------
 # UI
 # ------------------------------------------------
@@ -379,17 +378,18 @@ Conversations about feedback can sometimes strengthen a therapy relationship. At
 
 Please also note that materials shared with a therapist may become part of the clinical record depending on their documentation practices.
 
-Please also be aware that in circumstances of therapy harm or abuse, it is not always safe for a client to give feedback to a therapist. If you are experiencing therapy harm or abuse, or wonder if you may be, here is a starting document: **https://docs.google.com/document/d/1puwUQ5SjOyxyxcSdw-2q3YoPVOhOAsxM274qaEeoaCw/edit?usp=sharing**.
+Please also be aware that in circumstances of therapy harm or abuse, it is not always safe for a client to give feedback to a therapist. If you are experiencing therapy harm or abuse, or wonder if you may be, here is a starting document: 
+<a href="https://docs.google.com/document/d/1puwUQ5SjOyxyxcSdw-2q3YoPVOhOAsxM274qaEeoaCw/edit?usp=sharing" target="_blank">Click here</a>.
 
 ---
 
 ### About Us
 
-This tool was created by **Sam Brandsen** in collaboration with the **Therapy Harm Response & Prevention initiative**.
+This tool was created by <b>Sam Brandsen</b> in collaboration with the <b>Therapy Harm Response & Prevention initiative</b>.
 
-If you have any feedback about the app, please feel welcome to contact us via the following form **https://forms.gle/pdj6dsNrtw9Ep13P9**.
-""")
-
+If you have any feedback about the app, please feel welcome to contact us via the following form 
+<a href="https://forms.gle/pdj6dsNrtw9Ep13P9" target="_blank">Click here</a>.
+""", unsafe_allow_html=True)
 focus = st.radio(
     "Focus of reflection",
     ["General Feedback", "Concerns / Harm", "Both"]
