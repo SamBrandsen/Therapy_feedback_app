@@ -360,7 +360,6 @@ This tool aims to help you reflect on your experience in therapy — what feels 
 
 The tool generates a blank reflection template based on the preferences you select. After downloading the document, you may answer as many or as few questions as you like.
 
-This website does not collect or store responses. It only generates a downloadable template for your own use.
 
 ---
 
